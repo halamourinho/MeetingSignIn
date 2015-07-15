@@ -14,6 +14,7 @@ using System.Collections;
 
 namespace MeetingSignIn.Controllers
 {
+    [RoutePrefix("api/meeting")]
     public class MeetingsController : ApiController
     {
         private MeetingContext db = new MeetingContext();
@@ -24,6 +25,12 @@ namespace MeetingSignIn.Controllers
         private readonly object indexlock = new object();
 
         // POST: api/signin
+        /// <summary>
+        /// Sign in
+        /// </summary>
+        /// <param name="alias">alias</param>
+        /// <returns>a list of meetings</returns>
+        [Route("signin")]
         [ResponseType(typeof(List<Meeting>))]
         public IHttpActionResult PostSignin(String alias)
         {
@@ -41,6 +48,7 @@ namespace MeetingSignIn.Controllers
                 return BadRequest("No meeting found");
             }
         }
+        [Route("signin_a_meeting")]
         [ResponseType(typeof(Meeting))]
         public IHttpActionResult PostSigninMeeting(String alias, int meetingId)
         {
@@ -66,6 +74,7 @@ namespace MeetingSignIn.Controllers
             }
             return Ok(meeting);
         }
+        [Route("start")]
         [ResponseType(typeof(List<Meeting>))]
         public async Task<IHttpActionResult> PostStart(String alias)
         {
@@ -82,6 +91,7 @@ namespace MeetingSignIn.Controllers
             }
             return Ok(meetings);
         }
+        [Route("start_a_meeting")]
         [ResponseType(typeof(Meeting))]
         public IHttpActionResult PostStartMeeting(String alias, int meetingId)
         {
