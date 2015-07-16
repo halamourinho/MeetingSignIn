@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Contexts;
 using System.Web;
 
 namespace MeetingSignIn.Models
@@ -16,19 +18,22 @@ namespace MeetingSignIn.Models
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public List<Member> Members { get; set; }
-        private int signinCount = 0;
+        private int _signinCount = 0;
         public bool Completed { get; set; }
+        public string Newest { get; set; }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public bool Signin(string alias)
         {
-            Member member = Members.Find(m => m.Alias.Equals(alias) && !m.Signed);
-            if (member != null)
+            var member = Members.Find(m => m.Alias.Equals(alias) && !m.Signed);
+            if (member == null)
             {
                 return false;
             }
             member.Signed = true;
-            signinCount++;
-            if (signinCount == Members.Count)
+            Newest = alias;
+            _signinCount++;
+            if (_signinCount == Members.Count)
             {
                 Completed = true;
             }

@@ -31,6 +31,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>App_Data/XmlDocument.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -158,8 +159,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Meetings1Controller.cs" />
     <Compile Include="Controllers\MeetingsController.cs" />
+    <Compile Include="Controllers\MeetingsWebController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -167,7 +168,12 @@
     <Compile Include="Migrations\201507150627029_initial.Designer.cs">
       <DependentUpon>201507150627029_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507160456139_initial1.cs" />
+    <Compile Include="Migrations\201507160456139_initial1.Designer.cs">
+      <DependentUpon>201507160456139_initial1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Cache.cs" />
     <Compile Include="Models\Meeting.cs" />
     <Compile Include="Models\MeetingContext.cs" />
     <Compile Include="Models\Member.cs" />
@@ -176,7 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="Content\200712231523651_2.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -225,22 +230,18 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Home\ViewPage1.cshtml" />
-    <Content Include="Views\Meetings\Create.cshtml" />
-    <Content Include="Views\Meetings\Delete.cshtml" />
-    <Content Include="Views\Meetings\Details.cshtml" />
-    <Content Include="Views\Meetings\Edit.cshtml" />
-    <Content Include="Views\Meetings\Index.cshtml" />
     <Content Include="Views\Meetings1\Create.cshtml" />
     <Content Include="Views\Meetings1\Delete.cshtml" />
     <Content Include="Views\Meetings1\Details.cshtml" />
     <Content Include="Views\Meetings1\Edit.cshtml" />
     <Content Include="Views\Meetings1\Index.cshtml" />
-    <Content Include="Views\Meetings1\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201507150627029_initial.resx">
       <DependentUpon>201507150627029_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507160456139_initial1.resx">
+      <DependentUpon>201507160456139_initial1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

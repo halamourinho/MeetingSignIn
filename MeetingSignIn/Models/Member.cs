@@ -20,5 +20,10 @@ namespace MeetingSignIn.Models
             Alias = alias;
             Signed = false;
         }
+
+        public Member()
+        {
+            
+        }
     }
 }
