@@ -132,19 +132,20 @@ namespace MeetingSignIn.Controllers
                 return HttpNotFound();
             }
             var persons = meeting.Members.Where(m => m.Signed).Select(
-                m => db.Persons.Find(m.Alias)).ToList();
+                m => m.Alias).ToList();
             var newest = db.Persons.Find(meeting.Newest);
             var owner = db.Persons.Find(meeting.Owner);
             ViewData["alias"] = alias;
             ViewData["persons"] = persons;
             ViewData["newest"] = newest;
             ViewData["owner"] = owner;
-            return JsonResult(new
-            {
-                persons = persons.ToList(),
-                newest = newest,
-                owner = owner
-            });
+            return View();
+            //    JsonResult(new
+            //{
+            //    persons = persons.ToList(),
+            //    newest = newest,
+            //    owner = owner
+            //});
         }
 
         [NonAction]
