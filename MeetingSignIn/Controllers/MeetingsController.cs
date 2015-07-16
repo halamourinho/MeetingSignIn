@@ -132,7 +132,8 @@ namespace MeetingSignIn.Controllers
                 return HttpNotFound();
             }
             var persons = meeting.Members.Where(m => m.Signed).Select(
-                m => m.Alias).ToList();
+                m => m.Alias).ToList() ?? new List<string>();
+            persons.Add(alias);
             var newest = db.Persons.Find(meeting.Newest);
             var owner = db.Persons.Find(meeting.Owner);
             ViewData["alias"] = alias;
@@ -146,6 +147,11 @@ namespace MeetingSignIn.Controllers
             //    newest = newest,
             //    owner = owner
             //});
+        }
+
+        public ActionResult Login()
+        {
+            return this.View();
         }
 
         [NonAction]
