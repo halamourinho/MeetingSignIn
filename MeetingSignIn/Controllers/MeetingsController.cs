@@ -21,7 +21,7 @@ namespace MeetingSignIn.Controllers
         {
             if (!ModelState.IsValid || alias == null)
             {
-                return ErrorResult("invalid parameter");
+                return ErrorResult(1, ModelState.ToString());
             }
 
             lock (Indexlock)
@@ -31,24 +31,24 @@ namespace MeetingSignIn.Controllers
                     return JsonResult(
                         new
                         {
-                            result = true,
+                            result = 0,
                             meetings = index[alias]
                         });
                 }
             }
-            return ErrorResult("No meeting found with alias " + alias);
+            return ErrorResult(4, "No meeting found with alias " + alias);
         }
 
         public ActionResult SigninMeeting(string alias, int meetingId)
         {
             if (!ModelState.IsValid || alias == null)
             {
-                return ErrorResult("invalid parameter");
+                return ErrorResult(1, ModelState.ToString());
             }
             var meeting = activeMeetings.Find(m => m.Id == meetingId);
             if (meeting == null)
             {
-                return ErrorResult("No active meeting found with meeting id " + meetingId);
+                return ErrorResult(5, "No active meeting found with meeting id " + meetingId);
             }
             if (meeting.Signin(alias))
             {
@@ -64,7 +64,7 @@ namespace MeetingSignIn.Controllers
             return JsonResult(
                 new
                 {
-                    result = true,
+                    result = 0,
                     meeting = meeting
                 });
         }
@@ -73,13 +73,13 @@ namespace MeetingSignIn.Controllers
         {
             if (!ModelState.IsValid || alias == null)
             {
-                return ErrorResult("invalid parameter");
+                return ErrorResult(1, ModelState.ToString());
             }
             var meetings = await GetMeetingsFromSharePoint(alias);
             meetings = meetings.FindAll(m => !activeMeetings.Exists(am => am.Id == m.Id));
             if (meetings.Count == 0)
             {
-                return ErrorResult("No nonactive meeting found with alias" + alias);
+                return ErrorResult(2, "No nonactive meeting found with alias" + alias);
             }
             lock (MeetingLock)
             {
@@ -88,7 +88,7 @@ namespace MeetingSignIn.Controllers
             return JsonResult(
                 new
                 {
-                    result = true,
+                    result = 0,
                     meetings = meetings
                 });
 
@@ -98,12 +98,12 @@ namespace MeetingSignIn.Controllers
         {
             if (!ModelState.IsValid || alias == null)
             {
-                return ErrorResult("invalid parameter");
+                return ErrorResult(1, ModelState.ToString());
             }
             var meeting = tempMeetings.Find(m => m.Id == meetingId);
             if (meeting == null)
             {
-                return ErrorResult("No meeting found with meeting id" + meetingId);
+                return ErrorResult(3, "No meeting found with meeting id" + meetingId);
             }
             lock (MeetingLock)
             {
@@ -115,7 +115,7 @@ namespace MeetingSignIn.Controllers
             return JsonResult(
                 new
                 {
-                    result = true,
+                    result = 0,
                     meeting = meeting
                 });
         }
@@ -132,7 +132,8 @@ namespace MeetingSignIn.Controllers
                 return HttpNotFound();
             }
             var persons = meeting.Members.Where(m => m.Signed).Select(
-                m => m.Alias).ToList();
+                m => m.Alias).ToList() ?? new List<string>();
+            persons.Add(alias);
             var newest = db.Persons.Find(meeting.Newest);
             var owner = db.Persons.Find(meeting.Owner);
             ViewData["alias"] = alias;
@@ -146,6 +147,11 @@ namespace MeetingSignIn.Controllers
             //    newest = newest,
             //    owner = owner
             //});
+        }
+
+        public ActionResult Login()
+        {
+            return this.View();
         }
 
         [NonAction]
@@ -189,12 +195,12 @@ namespace MeetingSignIn.Controllers
             }
         }
         [NonAction]
-        private JsonResult ErrorResult(string str)
+        private JsonResult ErrorResult(int status, string str)
         {
             return JsonResult(
                 new
                 {
-                    result = false, message = str
+                    result = status, message = str
                 });
         }
         [NonAction]

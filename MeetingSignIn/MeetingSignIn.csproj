@@ -230,11 +230,12 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Meetings1\Create.cshtml" />
-    <Content Include="Views\Meetings1\Delete.cshtml" />
-    <Content Include="Views\Meetings1\Details.cshtml" />
-    <Content Include="Views\Meetings1\Edit.cshtml" />
-    <Content Include="Views\Meetings1\Index.cshtml" />
+    <Content Include="Views\Meetings\Create.cshtml" />
+    <Content Include="Views\Meetings\Delete.cshtml" />
+    <Content Include="Views\Meetings\Details.cshtml" />
+    <Content Include="Views\Meetings\Edit.cshtml" />
+    <Content Include="Views\Meetings\ShowMeeting.cshtml" />
+    <Content Include="Views\Meetings\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201507150627029_initial.resx">
