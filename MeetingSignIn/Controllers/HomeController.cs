@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MeetingSignIn.Models;
 
 namespace MeetingSignIn.Controllers
 {
@@ -11,8 +12,8 @@ namespace MeetingSignIn.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-
-            return View();
+             
+            return View("ViewPage1");
         }
     }
 }
