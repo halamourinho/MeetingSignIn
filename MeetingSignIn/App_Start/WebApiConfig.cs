@@ -16,9 +16,14 @@ namespace MeetingSignIn
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{action}"
             );
+        }
+
+        public static void Main()
+        {
+            var v = new {s = "111", x = 111};
+            Console.WriteLine(v.GetType());
         }
     }
 }
