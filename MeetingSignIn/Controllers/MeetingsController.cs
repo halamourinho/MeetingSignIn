@@ -31,9 +31,8 @@ namespace MeetingSignIn.Controllers
                     return JsonResult(
                         new
                         {
-                            result = 0,
-                            meetings = index[alias],
-                            message = "meetings can be signed in"
+                            result = new { status = 0, message = "meetings can be signed in" },
+                            meetings = index[alias]
                         });
                 }
             }
@@ -65,9 +64,8 @@ namespace MeetingSignIn.Controllers
             return JsonResult(
                 new
                 {
-                    result = 0,
-                    meeting = meeting,
-                    message = "sign in a meeting successful. meeting theme is" + meeting.Theme
+                    result = new { status = 0, message = "sign in a meeting successful. meeting theme is" + meeting.Theme },
+                    meeting = meeting
                 });
         }
 
@@ -90,9 +88,8 @@ namespace MeetingSignIn.Controllers
             return JsonResult(
                 new
                 {
-                    result = 0,
-                    meetings = meetings,
-                    message = "meetings can be started"
+                    result = new { status = 0, message = "meetings can be started" },
+                    meetings = meetings
                 });
 
         }
@@ -118,9 +115,8 @@ namespace MeetingSignIn.Controllers
             return JsonResult(
                 new
                 {
-                    result = 0,
-                    meeting = meeting,
-                    message = "start a meeting successful. meeting theme is" + meeting.Theme
+                    result = new { status = 0, message = "start a meeting successful. meeting theme is" + meeting.Theme },
+                    meeting = meeting
                 });
         }
 
@@ -204,7 +200,7 @@ namespace MeetingSignIn.Controllers
             return JsonResult(
                 new
                 {
-                    result = status, message = str
+                    result = new { status = status, message = str }
                 });
         }
         [NonAction]
