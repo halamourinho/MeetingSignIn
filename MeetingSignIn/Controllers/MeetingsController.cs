@@ -32,7 +32,8 @@ namespace MeetingSignIn.Controllers
                         new
                         {
                             result = 0,
-                            meetings = index[alias]
+                            meetings = index[alias],
+                            message = "meetings can be signed in"
                         });
                 }
             }
@@ -65,7 +66,8 @@ namespace MeetingSignIn.Controllers
                 new
                 {
                     result = 0,
-                    meeting = meeting
+                    meeting = meeting,
+                    message = "sign in a meeting successful. meeting theme is" + meeting.Theme
                 });
         }
 
@@ -89,7 +91,8 @@ namespace MeetingSignIn.Controllers
                 new
                 {
                     result = 0,
-                    meetings = meetings
+                    meetings = meetings,
+                    message = "meetings can be started"
                 });
 
         }
@@ -116,7 +119,8 @@ namespace MeetingSignIn.Controllers
                 new
                 {
                     result = 0,
-                    meeting = meeting
+                    meeting = meeting,
+                    message = "start a meeting successful. meeting theme is" + meeting.Theme
                 });
         }
 
